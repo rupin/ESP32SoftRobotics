@@ -78,13 +78,13 @@ class SRControl:
         """
         Activate relays 0 and 1 on the specified chip to turn on inflation for 15 seconds.
         """
-        self.set_relays(chip_index, 0b0011, duration=15)
+        self.set_relays(chip_index, 0b0011)
 
     def deflate(self, chip_index):
         """
         Activate relays 2 and 3 on the specified chip to turn on deflation for 15 seconds.
         """
-        self.set_relays(chip_index, 0b1100, duration=15)
+        self.set_relays(chip_index, 0b1100)
 
     def hold(self, chip_index=None):
         """
