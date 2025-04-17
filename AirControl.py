@@ -2,7 +2,7 @@ import machine
 import time
 
 class SRControl:
-    def __init__(self, data_pin, clock_pin, latch_pin, oe_pin, num_chips=1):
+    def __init__(self, data_pin, clock_pin, latch_pin,oe_pin, num_chips=1):
         """
         Initialize the 74HC595 shift register class.
 
@@ -28,6 +28,8 @@ class SRControl:
 
     def _pulse(self, pin):
         """Generate a pulse on the specified pin."""
+        pin.value(0)
+        time.sleep_ms(1)
         pin.value(1)
         time.sleep_ms(1)  # Small delay for stability
         pin.value(0)
@@ -47,6 +49,8 @@ class SRControl:
         """
         Latch and update the outputs of the shift register.
         """
+        print(self.state)
+        self.oepin.value(1)
         self._shift_out()
         self._pulse(self.latch)
         self.oepin.value(0)
@@ -72,6 +76,7 @@ class SRControl:
 
         # Update the state for the specified chip
         self.state[chip_index] = (self.state[chip_index] & 0xF0) | low_nibble
+        
         self.update()
 
         if duration:
@@ -104,3 +109,23 @@ class SRControl:
                 raise ValueError("Invalid chip index.")
             self.state[chip_index] = 0x00
         self.update()# Write your code here :-)
+
+
+
+# Sample Cod
+# Connections
+DIN  to D15
+CLK to D2
+LCH Pin to D4
+OE to D5
+
+#src=SRControl(15,2,4,5)
+#while(True):
+#    src.inflate(0)
+#    time.sleep(1)
+#    src.hold(0)
+#    time.sleep(1)
+#    src.deflate(0)
+#    time.sleep(1)
+#    src.hold(0)
+#    time.sleep(1)
