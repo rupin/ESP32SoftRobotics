@@ -114,10 +114,10 @@ class SRControl:
 
 # Sample Cod
 # Connections
-DIN  to D15
-CLK to D2
-LCH Pin to D4
-OE to D5
+#DIN  to D15
+#CLK to D2
+#LCH Pin to D4
+#OE to D5
 
 #src=SRControl(15,2,4,5)
 #while(True):
